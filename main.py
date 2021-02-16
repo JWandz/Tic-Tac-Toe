@@ -5,6 +5,7 @@ def view(lis):
     print(f"| {lis[6]} {lis[7]} {lis[8]} |")
     print("---------")
 
+
 def not_finished(lis_check):
     """when neither side has three in a row but the grid still has empty cells."""
     if "_" in lis_check:
@@ -12,19 +13,25 @@ def not_finished(lis_check):
     else:
         return False
 
+
 def winning(lis_check, checker):
     """when the grid has three X or O"""
     for n in range(0, 9, 3):
-        if lis_check[n] == checker and lis_check[n] == lis_check[n+1] and lis_check[n] == lis_check[n+2]:
+        if lis_check[n] == checker and lis_check[n] == lis_check[
+                n + 1] and lis_check[n] == lis_check[n + 2]:
             return True
     for n in range(3):
-        if lis_check[n] == checker and lis_check[n] == lis_check[n+3] and lis_check[n] == lis_check[n+6]:
+        if lis_check[n] == checker and lis_check[n] == lis_check[
+                n + 3] and lis_check[n] == lis_check[n + 6]:
             return True
-    if lis_check[0] == checker and lis_check[0] == lis_check[4] and lis_check[0] == lis_check[8]:
+    if lis_check[0] == checker and lis_check[0] == lis_check[4] and lis_check[
+            0] == lis_check[8]:
         return True
-    if lis_check[2] == checker and lis_check[2] == lis_check[4] and lis_check[2] == lis_check[6]:
+    if lis_check[2] == checker and lis_check[2] == lis_check[4] and lis_check[
+            2] == lis_check[6]:
         return True
     return False
+
 
 def impossible(lis_check):
     """Returns True when the grid has three X’s in a row as well as three O’s in a row, 
@@ -47,6 +54,7 @@ def impossible(lis_check):
         return True
     return False
 
+
 def check_results(lis_check):
     """Final checker returns string"""
     if impossible(lis_check):
@@ -60,6 +68,7 @@ def check_results(lis_check):
     else:
         return True, ("Draw")
 
+
 def return_index(double):
     """Converts [1, 3] to  index"""
     if double[0] == 1:
@@ -70,14 +79,16 @@ def return_index(double):
         return double[1] + 5
     else:
         print("number is too big")
-        
+
+
 def check_if_empty(lis, double):
     num_index = return_index(double)
     if lis[num_index] not in "XO":
         return True
     else:
         return False
-    
+
+
 def make_move(lis, player):
     """Player move phase"""
     print("Player \"" + player + "\" makes a move")
@@ -92,19 +103,21 @@ def make_move(lis, player):
                 print("You should enter 2 numbers only!")
                 continue
             #check if coordinates are not to big
-            if coordinates[0] > 3 or coordinates[0] < 1 or  coordinates[1] > 3 or coordinates[1] < 1:
+            if coordinates[0] > 3 or coordinates[0] < 1 or coordinates[
+                    1] > 3 or coordinates[1] < 1:
                 print("Coordinates should be from 1 to 3!")
                 continue
             if not check_if_empty(lis, coordinates):
                 print("This cell is occupied! Choose another one!")
                 continue
             break
-        except: 
+        except:
             print("You should enter numbers!")
             continue
     index = return_index(coordinates)
     new_string = lis[:index] + player + lis[index + 1:]
     return new_string
+
 
 def swap_player():
     if player == 'X':
@@ -112,19 +125,21 @@ def swap_player():
     else:
         return 'X'
 
+
 #starting point
 lis = "_________"
 view(lis)
 player = 'X'
 
-
 while True:
-    lis = make_move(lis, player) 
+    lis = make_move(lis, player)
     view(lis)
-    
+
     end, printout = check_results(lis)
     print(printout)
     if end:
         break
     player = swap_player()
 
+
+print"Test"
